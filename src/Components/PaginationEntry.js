@@ -48,7 +48,7 @@ const PaginationEntry = () => {
   return (
     <>
       <div className="container-fluid">
-        <div className="row">
+        <div className="row overflow-auto w-100">
           <table class="table table-hover">
             <tbody>{renderList}</tbody>
           </table>
