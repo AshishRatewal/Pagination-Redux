@@ -1,11 +1,14 @@
 import React from "react";
-
+import Header from "./Components/Header";
+import Pagination from "./Components/Pagination";
+import PaginationEntry from "./Components/PaginationEntry";
 const App = () => {
   return (
     <>
-      <h1>This is the app.js</h1>
+      <Header />
+      <PaginationEntry />
+      <Pagination />
     </>
   );
 };
-
 export default App;
