@@ -1,5 +1,12 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { searchData } from '../Redux/Action/Actions';
 const Header = () => {
+  const dispatch = useDispatch();
+  const getSearchData = (e) => {
+    const {value} = e.target;
+    dispatch(searchData(value));
+  }
   return (
     <>
       <nav class="navbar navbar-expand-lg navbar-dark primary sticky-top">
@@ -20,11 +27,7 @@ const Header = () => {
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
-                  Home
-                </a>
-              </li>
+              <li></li>
             </ul>
             <form class="d-flex">
               <input
@@ -32,6 +35,7 @@ const Header = () => {
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                onChange={getSearchData}
               />
             </form>
           </div>

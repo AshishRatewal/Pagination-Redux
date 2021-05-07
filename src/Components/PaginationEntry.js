@@ -6,9 +6,10 @@ const PaginationEntry = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.allEntry.setEntry.data);
   let pageNumber = useSelector((state) => state.allEntry.setPageNumber);
+  let searchData = useSelector((state) => state.allEntry.searchData);
   // get data from api
-   const fetchEntry = async (pageNum) => {
-     console.log("page number   ", pageNum);
+  const fetchEntry = async (pageNum) => {
+    console.log("page number   ", pageNum);
     const response = await axios
       .get(
         `https://api.instantwebtools.net/v1/passenger?page=${pageNum}&size=20`
@@ -22,9 +23,15 @@ const PaginationEntry = () => {
     fetchEntry(pageNumber);
   }, [pageNumber]);
   // showing the data from redux store;
-  const renderList =
-    data &&
-    data.map((val, index) => {
+  const renderList = data && data
+    .filter((vlue) => {
+      if (searchData == "") {
+        return vlue;
+      } else if (vlue.name.toLowerCase().includes(searchData.toLowerCase())) {
+        return vlue;
+      }
+    })
+    .map((val, index) => {
       const { airline, name, trips, id } = val;
       const {
         country,
