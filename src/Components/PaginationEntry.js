@@ -7,12 +7,13 @@ const PaginationEntry = () => {
   const data = useSelector((state) => state.allEntry.setEntry.data);
   let pageNumber = useSelector((state) => state.allEntry.setPageNumber);
   let searchData = useSelector((state) => state.allEntry.searchData);
+  let howMuchEntry = useSelector((state) => state.allEntry.howMuchEntry);
   // get data from api
-  const fetchEntry = async (pageNum) => {
+  const fetchEntry = async (pageNum,noOfEntry) => {
     console.log("page number   ", pageNum);
     const response = await axios
       .get(
-        `https://api.instantwebtools.net/v1/passenger?page=${pageNum}&size=20`
+        `https://api.instantwebtools.net/v1/passenger?page=${pageNum}&size=${noOfEntry}`
       )
       .catch((err) => {
         console.log("Error", err);
@@ -20,8 +21,8 @@ const PaginationEntry = () => {
     dispatch(setEntry(response.data));
   };
   useEffect(() => {
-    fetchEntry(pageNumber);
-  }, [pageNumber]);
+    fetchEntry(pageNumber,howMuchEntry);
+  }, [pageNumber,howMuchEntry]);
   // showing the data from redux store;
   const renderList = data && data
     .filter((vlue) => {

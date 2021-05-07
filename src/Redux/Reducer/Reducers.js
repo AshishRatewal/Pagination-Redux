@@ -1,9 +1,10 @@
-import { SET_ENTRY , PAGE_NUMBER, SEARCH_DATA } from "../Store/Events";
+import { SET_ENTRY , PAGE_NUMBER, SEARCH_DATA, HOW_MANY_ENTRY } from "../Store/Events";
 
 const initialState = {
   setEntry: [],
   setPageNumber: 1,
   searchData: '',
+  howMuchEntry: 20,
 };
 
 export const setEntryData = (state = initialState, { type, payload }) => {
@@ -22,6 +23,11 @@ export const setEntryData = (state = initialState, { type, payload }) => {
       return {
         ...state,
         searchData: payload,
+      }
+    case HOW_MANY_ENTRY:
+      return {
+        ...state,
+        howMuchEntry: payload,
       }
     default:
       return state;
