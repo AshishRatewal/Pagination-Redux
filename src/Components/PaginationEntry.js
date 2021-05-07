@@ -34,7 +34,7 @@ const PaginationEntry = () => {
         <td>{name}</td>
         <td>{country}</td>
         <td>
-          <img src={logo} alt={name} />
+          <img src={logo} alt={name} className="images"/>
         </td>
         <td>{slogan}</td>
         <td>{head_quaters}</td>

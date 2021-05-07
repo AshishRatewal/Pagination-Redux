@@ -1,14 +1,13 @@
 .primary{
     background-color: #3f51b5;
 }
-img{
-    width: 100%;
-    max-width: 100px;
-}
 
 .MuiPagination-root{
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 1rem 0 2rem 0;
+}
+.images{
+    max-width: 100px;
 }
