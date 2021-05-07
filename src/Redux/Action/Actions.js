@@ -1,4 +1,4 @@
-import { SET_ENTRY } from "../Store/Events";
+import { SET_ENTRY, PAGE_NUMBER } from "../Store/Events";
 
 export const setEntry = (entry) => {
   return {
@@ -6,3 +6,10 @@ export const setEntry = (entry) => {
     payload: entry,
   };
 };
+
+export const setPageNumber = (pageNumber) => {
+  return {
+    type: PAGE_NUMBER,
+    payload: pageNumber,
+  }
+}

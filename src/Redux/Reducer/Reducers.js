@@ -1,7 +1,8 @@
-import { SET_ENTRY } from "../Store/Events";
+import { SET_ENTRY , PAGE_NUMBER } from "../Store/Events";
 
 const initialState = {
   setEntry: [],
+  setPageNumber: 1,
 };
 
 export const setEntryData = (state = initialState, { type, payload }) => {
@@ -11,6 +12,11 @@ export const setEntryData = (state = initialState, { type, payload }) => {
         ...state,
         setEntry: payload,
       };
+    case PAGE_NUMBER:
+      return{
+        ...state,
+        setPageNumber: payload,
+      }
     default:
       return state;
   }

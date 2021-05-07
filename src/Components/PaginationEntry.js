@@ -5,46 +5,52 @@ import { setEntry } from "../Redux/Action/Actions";
 const PaginationEntry = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.allEntry.setEntry.data);
+  let pageNumber = useSelector((state) => state.allEntry.setPageNumber);
   // get data from api
+   const fetchEntry = async (pageNum) => {
+     console.log("page number   ", pageNum);
+    const response = await axios
+      .get(
+        `https://api.instantwebtools.net/v1/passenger?page=${pageNum}&size=20`
+      )
+      .catch((err) => {
+        console.log("Error", err);
+      });
+    dispatch(setEntry(response.data));
+  };
   useEffect(() => {
-    const fetchEntry = async () => {
-      const response = await axios
-        .get("https://api.instantwebtools.net/v1/passenger?page=10&size=20")
-        .catch((err) => {
-          console.log("Error", err);
-        });
-      dispatch(setEntry(response.data));
-    };
-    fetchEntry();
-  }, []);
+    fetchEntry(pageNumber);
+  }, [pageNumber]);
   // showing the data from redux store;
-  const renderList = data && data.map((val, index) => {
-    const { airline, name, trips, id } = val;
-    const {
-      country,
-      established,
-      head_quaters,
-      logo,
-      slogan,
-      website,
-    } = airline;
-    return (
-      <tr>
-        <th scope="row">{index + 1}</th>
-        <td>{name}</td>
-        <td>{country}</td>
-        <td>
-          <img src={logo} alt={name} className="images"/>
-        </td>
-        <td>{slogan}</td>
-        <td>{head_quaters}</td>
-        <td>
-          <a href={website}>{website}</a>
-        </td>
-        <td>{established}</td>
-      </tr>
-    );
-  });
+  const renderList =
+    data &&
+    data.map((val, index) => {
+      const { airline, name, trips, id } = val;
+      const {
+        country,
+        established,
+        head_quaters,
+        logo,
+        slogan,
+        website,
+      } = airline;
+      return (
+        <tr>
+          <th scope="row">{index + 1}</th>
+          <td>{name}</td>
+          <td>{country}</td>
+          <td>
+            <img src={logo} alt={name} className="images" />
+          </td>
+          <td>{slogan}</td>
+          <td>{head_quaters}</td>
+          <td>
+            <a href={website}>{website}</a>
+          </td>
+          <td>{established}</td>
+        </tr>
+      );
+    });
   return (
     <>
       <div className="container-fluid">
