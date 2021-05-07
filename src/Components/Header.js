@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { searchData, howManysEntry } from "../Redux/Action/Actions";
+import { Link } from "react-router-dom";
 const Header = () => {
   const dispatch = useDispatch();
   const getSearchData = (e) => {
@@ -17,9 +18,9 @@ const Header = () => {
     <>
       <nav class="navbar navbar-expand-lg navbar-dark primary sticky-top">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            Airline
-          </a>
+          <Link to="/">
+            <a class="navbar-brand">Airline Pagination</a>
+          </Link>
           <button
             class="navbar-toggler"
             type="button"
