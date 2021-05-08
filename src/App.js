@@ -1,16 +1,16 @@
 import React from "react";
 import Header from "./Components/Header";
-import PaginationComponent from './Components/PaginationComponent';
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import Edit from "./Components/Edit";
+import Pagination from "./Components/Pagination";
+import PaginationEntry from "./Components/PaginationEntry";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 const App = () => {
   return (
     <>
       <Router>
         <Header />
+        <Pagination />
         <Switch>
-          <Route path="/" exact component={PaginationComponent} />
-          <Route path="/Edit" exact component={Edit} />
+          <Route path="/" exact component={PaginationEntry} />
         </Switch>
       </Router>
     </>
