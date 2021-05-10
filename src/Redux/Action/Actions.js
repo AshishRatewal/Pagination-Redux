@@ -3,6 +3,7 @@ import {
   PAGE_NUMBER,
   SEARCH_DATA,
   HOW_MANY_ENTRY,
+  GET_EDIT_ID,
 } from "../Store/Events";
 
 export const setEntry = (entry) => {
@@ -32,3 +33,10 @@ export const howManysEntry = (howMuchEntry) => {
     payload: howMuchEntry,
   };
 };
+
+export const getEditId = (getId) => {
+  return {
+    type: GET_EDIT_ID,
+    payload: getId,
+  }
+}

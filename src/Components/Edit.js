@@ -1,5 +1,11 @@
 import React from "react";
-const Edit = () => {
+import { useSelector } from "react-redux";
+const Edit = (props) => {
+  const getEditId = useSelector((state) => state.allEntry.getEditId);
+  let mainData;
+  if (getEditId !== "") {
+    mainData = props.dataObj[getEditId];
+  }
   return (
     <>
       <div className="container my-4">
@@ -26,19 +32,19 @@ const Edit = () => {
               <div className="modal-body">
                 <form className="row g-3">
                   <div className="col-md-6">
-                    <label for="name" className="form-label">
+                    <label htmlFor="name" className="form-label">
                       Name
                     </label>
                     <input type="text" className="form-control" id="name" />
                   </div>
                   <div className="col-md-6">
-                    <label for="country" className="form-label">
+                    <label htmlFor="country" className="form-label">
                       Country
                     </label>
                     <input type="text" className="form-control" id="country" />
                   </div>
                   <div className="col-12">
-                    <label for="imgLink" className="form-label">
+                    <label htmlFor="imgLink" className="form-label">
                       Image Link
                     </label>
                     <input
@@ -49,7 +55,7 @@ const Edit = () => {
                     />
                   </div>
                   <div className="col-12">
-                    <label for="slogan" className="form-label">
+                    <label htmlFor="slogan" className="form-label">
                       Sloga
                     </label>
                     <input
@@ -60,7 +66,7 @@ const Edit = () => {
                     />
                   </div>
                   <div className="col-md-6">
-                    <label for="head_quater" className="form-label">
+                    <label htmlFor="head_quater" className="form-label">
                       Head Quater
                     </label>
                     <input
@@ -70,13 +76,13 @@ const Edit = () => {
                     />
                   </div>
                   <div className="col-md-4">
-                    <label for="website" className="form-label">
+                    <label htmlFor="website" className="form-label">
                       Wesite Link
                     </label>
                     <input type="text" className="form-control" id="website" />
                   </div>
                   <div className="col-md-2">
-                    <label for="established" className="form-label">
+                    <label htmlFor="established" className="form-label">
                       Established
                     </label>
                     <input

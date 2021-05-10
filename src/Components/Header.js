@@ -16,13 +16,13 @@ const Header = () => {
 
   return (
     <>
-      <nav class="navbar navbar-expand-lg navbar-dark primary sticky-top">
-        <div class="container-fluid">
-          <Link to="/">
-            <a class="navbar-brand">Airline Pagination</a>
+      <nav className="navbar navbar-expand-lg navbar-dark primary sticky-top">
+        <div className="container-fluid">
+          <Link to="/" className="navbar-brand">
+            Airline Pagination
           </Link>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -30,14 +30,14 @@ const Header = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li>
-                <form class="d-flex">
+                <form className="d-flex">
                   <input
-                    class="form-control"
+                    className="form-control"
                     type="number"
                     placeholder="Number of Entry 20"
                     aria-label="number"
@@ -47,9 +47,9 @@ const Header = () => {
                 </form>
               </li>
             </ul>
-            <form class="d-flex">
+            <form className="d-flex">
               <input
-                class="form-control"
+                className="form-control"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
