@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setEntry } from "../Redux/Action/Actions";
 import Edit from "./Edit";
 const PaginationEntry = () => {
   const dispatch = useDispatch();
+  const [getCloneArray, setCloneArray] = useState([]);
   const data = useSelector((state) => state.allEntry.setEntry.data);
-  let pageNumber = useSelector((state) => state.allEntry.setPageNumber);
-  let searchData = useSelector((state) => state.allEntry.searchData);
-  let howMuchEntry = useSelector((state) => state.allEntry.howMuchEntry);
+  const pageNumber = useSelector((state) => state.allEntry.setPageNumber);
+  const searchData = useSelector((state) => state.allEntry.searchData);
+  const howMuchEntry = useSelector((state) => state.allEntry.howMuchEntry);
   // get data from api
   const fetchEntry = async (pageNum, noOfEntry) => {
     const response = await axios
@@ -19,20 +20,30 @@ const PaginationEntry = () => {
         console.log("Error", err);
       });
     dispatch(setEntry(response.data));
+    setCloneArray(response.data.data);
   };
   useEffect(() => {
     fetchEntry(pageNumber, howMuchEntry);
   }, [pageNumber, howMuchEntry]);
   // showing the data from redux store;
   // clonning array from data
+
   let cloneArray = [];
-  if (data && data !== "") {
-    for (let i = 0; i < data.length; i++) {
-      cloneArray.push(data[i]);
+  if (getCloneArray && getCloneArray !== "") {
+    for (let i = 0; i < getCloneArray.length; i++) {
+      cloneArray.push(getCloneArray[i]);
     }
   }
+
+  // delete entry section
+  const deleteEntry = (e) => {
+    const {id} = e.target;
+    cloneArray.splice(id, 1);
+    setCloneArray(cloneArray);
+  };
   // end
-  const renderList = cloneArray
+
+  const renderList = getCloneArray
     .filter((vlue) => {
       if (searchData == "") {
         return vlue;
@@ -79,13 +90,18 @@ const PaginationEntry = () => {
             </button>
           </td>
           <td>
-            <button className="btn btn-danger" name={index}>
+            <button
+              className="btn btn-danger"
+              id={index}
+              onClick={deleteEntry}
+            >
               Delete
             </button>
           </td>
         </tr>
       );
     });
+
   return (
     <>
       <div className="container-fluid">
