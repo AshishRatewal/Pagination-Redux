@@ -5,7 +5,26 @@ const Edit = (props) => {
   let mainData;
   if (getEditId !== "") {
     mainData = props.dataObj[getEditId];
+    console.log("mainData", mainData);
+  } else {
+    mainData = {
+      name: "",
+      airline: {
+        id: "",
+        country: "",
+        established: "",
+        head_quaters: "",
+        logo: "",
+        sligan: "",
+        website: "",
+      },
+    };
   }
+  const { airline, name } = mainData;
+  const { country, established, head_quaters, logo, slogan, website } = airline;
+  const getUpdatData = () => {
+    alert("Data Updated");
+  };
   return (
     <>
       <div className="container my-4">
@@ -35,13 +54,23 @@ const Edit = (props) => {
                     <label htmlFor="name" className="form-label">
                       Name
                     </label>
-                    <input type="text" className="form-control" id="name" />
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="name"
+                      value={name}
+                    />
                   </div>
                   <div className="col-md-6">
                     <label htmlFor="country" className="form-label">
                       Country
                     </label>
-                    <input type="text" className="form-control" id="country" />
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="country"
+                      value={country}
+                    />
                   </div>
                   <div className="col-12">
                     <label htmlFor="imgLink" className="form-label">
@@ -52,17 +81,19 @@ const Edit = (props) => {
                       className="form-control"
                       id="imgLink"
                       placeholder="Image Link"
+                      value={logo}
                     />
                   </div>
                   <div className="col-12">
                     <label htmlFor="slogan" className="form-label">
-                      Sloga
+                      Slogan
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       id="slogan"
                       placeholder="Slogan"
+                      value={slogan}
                     />
                   </div>
                   <div className="col-md-6">
@@ -73,13 +104,19 @@ const Edit = (props) => {
                       type="text"
                       className="form-control"
                       id="head_quater"
+                      value={head_quaters}
                     />
                   </div>
                   <div className="col-md-4">
                     <label htmlFor="website" className="form-label">
                       Wesite Link
                     </label>
-                    <input type="text" className="form-control" id="website" />
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="website"
+                      value={website}
+                    />
                   </div>
                   <div className="col-md-2">
                     <label htmlFor="established" className="form-label">
@@ -89,6 +126,7 @@ const Edit = (props) => {
                       type="text"
                       className="form-control"
                       id="established"
+                      value={established}
                     />
                   </div>
                 </form>
@@ -101,7 +139,12 @@ const Edit = (props) => {
                 >
                   Close
                 </button>
-                <button type="button" className="btn btn-primary">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={getUpdatData}
+                  data-bs-dismiss="modal"
+                >
                   Save changes
                 </button>
               </div>
