@@ -1,29 +1,57 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getUpdatedData } from '../Redux/Action/Actions';
 const Edit = (props) => {
+  const dispatch = useDispatch();
   const getEditId = useSelector((state) => state.allEntry.getEditId);
-  let mainData;
+  let mainData, emptyObj;
   if (getEditId !== "") {
     mainData = props.dataObj[getEditId];
-    console.log("mainData", mainData);
+    emptyObj = {
+      name: mainData.name,
+      airline: {
+        country: mainData.airline.country,
+        established: mainData.airline.established,
+        head_quaters: mainData.airline.head_quaters,
+        logo: mainData.airline.logo,
+        slogan: mainData.airline.slogan,
+        website: mainData.airline.website,
+      },
+    };
   } else {
     mainData = {
       name: "",
       airline: {
-        id: "",
         country: "",
         established: "",
         head_quaters: "",
         logo: "",
-        sligan: "",
+        slogan: "",
         website: "",
       },
     };
   }
+  const [inputUpdate, setInputUpdate] = useState(emptyObj);
   const { airline, name } = mainData;
   const { country, established, head_quaters, logo, slogan, website } = airline;
+  const updateEntry = (e) => {
+    const { name, value } = e.target;
+    if (inputUpdate == undefined) {
+      setInputUpdate(emptyObj);
+    } else {
+      setInputUpdate((prevState) => ({
+        ...prevState,
+        [name]: value,
+        airline: {
+          ...prevState.airline,
+          [name]: value,
+        },
+      }));
+    }
+  };
   const getUpdatData = () => {
     alert("Data Updated");
+    dispatch(getUpdatedData(inputUpdate))
   };
   return (
     <>
@@ -58,7 +86,9 @@ const Edit = (props) => {
                       type="text"
                       className="form-control"
                       id="name"
-                      value={name}
+                      name="name"
+                      defaultValue={name}
+                      onChange={updateEntry}
                     />
                   </div>
                   <div className="col-md-6">
@@ -69,7 +99,9 @@ const Edit = (props) => {
                       type="text"
                       className="form-control"
                       id="country"
-                      value={country}
+                      name={"country"}
+                      defaultValue={country}
+                      onChange={updateEntry}
                     />
                   </div>
                   <div className="col-12">
@@ -80,8 +112,10 @@ const Edit = (props) => {
                       type="text"
                       className="form-control"
                       id="imgLink"
+                      name={"logo"}
                       placeholder="Image Link"
-                      value={logo}
+                      defaultValue={logo}
+                      onChange={updateEntry}
                     />
                   </div>
                   <div className="col-12">
@@ -92,8 +126,10 @@ const Edit = (props) => {
                       type="text"
                       className="form-control"
                       id="slogan"
+                      name={"slogan"}
                       placeholder="Slogan"
-                      value={slogan}
+                      defaultValue={slogan}
+                      onChange={updateEntry}
                     />
                   </div>
                   <div className="col-md-6">
@@ -104,7 +140,9 @@ const Edit = (props) => {
                       type="text"
                       className="form-control"
                       id="head_quater"
-                      value={head_quaters}
+                      name={"head_quaters"}
+                      defaultValue={head_quaters}
+                      onChange={updateEntry}
                     />
                   </div>
                   <div className="col-md-4">
@@ -115,7 +153,9 @@ const Edit = (props) => {
                       type="text"
                       className="form-control"
                       id="website"
-                      value={website}
+                      name={"website"}
+                      defaultValue={website}
+                      onChange={updateEntry}
                     />
                   </div>
                   <div className="col-md-2">
@@ -125,8 +165,10 @@ const Edit = (props) => {
                     <input
                       type="text"
                       className="form-control"
+                      name={"established"}
                       id="established"
-                      value={established}
+                      defaultValue={established}
+                      onChange={updateEntry}
                     />
                   </div>
                 </form>

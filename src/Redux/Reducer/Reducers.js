@@ -4,6 +4,7 @@ import {
   SEARCH_DATA,
   HOW_MANY_ENTRY,
   GET_EDIT_ID,
+  GET_UPDATED_DATA
 } from "../Store/Events";
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   searchData: "",
   howMuchEntry: 20,
   getEditId: '',
+  updateData: {},
 };
 
 export const setEntryData = (state = initialState, { type, payload }) => {
@@ -40,6 +42,11 @@ export const setEntryData = (state = initialState, { type, payload }) => {
       return {
         ...state,
         getEditId: payload,
+      }
+    case GET_UPDATED_DATA:
+      return {
+        ...state,
+        updateData: payload,
       }
     default:
       return state;

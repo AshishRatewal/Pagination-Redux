@@ -11,6 +11,7 @@ const PaginationEntry = () => {
   const pageNumber = useSelector((state) => state.allEntry.setPageNumber);
   const searchData = useSelector((state) => state.allEntry.searchData);
   const howMuchEntry = useSelector((state) => state.allEntry.howMuchEntry);
+  const updateData = useSelector((state) => state.allEntry.updateData);
   // get data from api
   const fetchEntry = async (pageNum, noOfEntry) => {
     const response = await axios
@@ -50,7 +51,6 @@ const PaginationEntry = () => {
     dispatch(getEditId(id));
   };
   // end
-
   const renderList = getCloneArray
     .filter((vlue) => {
       if (searchData === "") {
