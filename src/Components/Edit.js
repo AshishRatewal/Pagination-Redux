@@ -4,7 +4,7 @@ import { getUpdatedData } from '../Redux/Action/Actions';
 const Edit = (props) => {
   const dispatch = useDispatch();
   const getEditId = useSelector((state) => state.allEntry.getEditId);
-  let mainData, emptyObj;
+  let mainData, emptyObj,blanObj;
   if (getEditId !== "") {
     mainData = props.dataObj[getEditId];
     emptyObj = {
@@ -52,7 +52,8 @@ const Edit = (props) => {
   };
   const getUpdatData = () => {
     alert("Click on the update button to update the same");
-    dispatch(getUpdatedData(inputUpdate))
+    dispatch(getUpdatedData(inputUpdate));
+    setInputUpdate(blanObj);
   };
   return (
     <>
