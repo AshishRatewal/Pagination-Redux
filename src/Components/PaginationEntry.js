@@ -3,7 +3,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setEntry } from "../Redux/Action/Actions";
 import Edit from "./Edit";
-import { getEditId } from '../Redux/Action/Actions';
+import { getEditId } from "../Redux/Action/Actions";
 const PaginationEntry = () => {
   const dispatch = useDispatch();
   const [getCloneArray, setCloneArray] = useState([]);
@@ -12,19 +12,21 @@ const PaginationEntry = () => {
   const searchData = useSelector((state) => state.allEntry.searchData);
   const howMuchEntry = useSelector((state) => state.allEntry.howMuchEntry);
   const updateData = useSelector((state) => state.allEntry.updateData);
+  const [disp,setDisp] = useState('true');
+  const [editDisp,setEditDisp] = useState('');
   // get data from api
   const fetchEntry = async (pageNum, noOfEntry) => {
     const response = await axios
-    .get(
-      `https://api.instantwebtools.net/v1/passenger?page=${pageNum}&size=${noOfEntry}`
+      .get(
+        `https://api.instantwebtools.net/v1/passenger?page=${pageNum}&size=${noOfEntry}`
       )
       .catch((err) => {
         console.log("Error", err);
       });
-      dispatch(setEntry(response.data));
-      setCloneArray(response.data.data);
-    };
-    useEffect(() => {
+    dispatch(setEntry(response.data));
+    setCloneArray(response.data.data);
+  };
+  useEffect(() => {
     fetchEntry(pageNumber, howMuchEntry);
   }, [pageNumber, howMuchEntry]);
   // showing the data from redux store;
@@ -49,6 +51,14 @@ const PaginationEntry = () => {
   const editEntry = (e) => {
     const { id } = e.target;
     dispatch(getEditId(id));
+    setDisp('');
+    setEditDisp('false');
+  };
+  const updateEntry = (e) => {
+    const { id } = e.target;
+    cloneArray.splice(id,1,updateData);
+    setCloneArray(cloneArray);
+    console.log("the clone Array",cloneArray);
   };
   // end
   const renderList = getCloneArray
@@ -81,11 +91,23 @@ const PaginationEntry = () => {
           <td>
             <button
               type="button"
+              className={`btn btn-secondary`}
+              id={index}
+              onClick={updateEntry}
+              disabled={disp}
+            >
+              Update
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
-              className="btn btn-warning"
+              className={`btn btn-warning`}
               id={index}
               onClick={editEntry}
+              disabled={editDisp}
             >
               Edit
             </button>
