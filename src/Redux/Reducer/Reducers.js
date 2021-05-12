@@ -3,8 +3,6 @@ import {
   PAGE_NUMBER,
   SEARCH_DATA,
   HOW_MANY_ENTRY,
-  GET_EDIT_ID,
-  GET_UPDATED_DATA
 } from "../Store/Events";
 
 const initialState = {
@@ -12,8 +10,6 @@ const initialState = {
   setPageNumber: 1,
   searchData: "",
   howMuchEntry: 20,
-  getEditId: '',
-  updateData: {},
 };
 
 export const setEntryData = (state = initialState, { type, payload }) => {
@@ -38,16 +34,6 @@ export const setEntryData = (state = initialState, { type, payload }) => {
         ...state,
         howMuchEntry: payload,
       };
-    case GET_EDIT_ID:
-      return {
-        ...state,
-        getEditId: payload,
-      }
-    case GET_UPDATED_DATA:
-      return {
-        ...state,
-        updateData: payload,
-      }
     default:
       return state;
   }

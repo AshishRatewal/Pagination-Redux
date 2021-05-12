@@ -2,3 +2,5 @@
 // The api Data   
 
 // contentEditable={true}
+const { airline, name } = mainData;
+  const { country, established, head_quaters, logo, slogan, website } = airline;
