@@ -34,6 +34,7 @@ const Edit = (props) => {
   const [inputUpdate, setInputUpdate] = useState(emptyObj);
   const { airline, name } = mainData;
   const { country, established, head_quaters, logo, slogan, website } = airline;
+  
   const updateEntry = (e) => {
     const { name, value } = e.target;
     if (inputUpdate == undefined) {
@@ -50,7 +51,7 @@ const Edit = (props) => {
     }
   };
   const getUpdatData = () => {
-    alert("Data Updated");
+    alert("Click on the update button to update the same");
     dispatch(getUpdatedData(inputUpdate))
   };
   return (

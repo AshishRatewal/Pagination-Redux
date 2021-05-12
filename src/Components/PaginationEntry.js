@@ -12,8 +12,9 @@ const PaginationEntry = () => {
   const searchData = useSelector((state) => state.allEntry.searchData);
   const howMuchEntry = useSelector((state) => state.allEntry.howMuchEntry);
   const updateData = useSelector((state) => state.allEntry.updateData);
-  const [disp,setDisp] = useState('true');
-  const [editDisp,setEditDisp] = useState('');
+  const [disp, setDisp] = useState("true");
+  const [editDisp, setEditDisp] = useState("");
+  const getEditIdtoEdit = useSelector((state) => state.allEntry.getEditId);
   // get data from api
   const fetchEntry = async (pageNum, noOfEntry) => {
     const response = await axios
@@ -51,14 +52,20 @@ const PaginationEntry = () => {
   const editEntry = (e) => {
     const { id } = e.target;
     dispatch(getEditId(id));
-    setDisp('');
-    setEditDisp('false');
+    setDisp("");
+    setEditDisp("true");
   };
-  const updateEntry = (e) => {
+  const updateSameEntry = (e) => {
     const { id } = e.target;
-    cloneArray.splice(id,1,updateData);
-    setCloneArray(cloneArray);
-    console.log("the clone Array",cloneArray);
+    if (getEditIdtoEdit == id) {
+      cloneArray.splice(id, 1, updateData);
+      setCloneArray(cloneArray);
+      console.log("the clone Array", cloneArray);
+      setEditDisp("");
+      setDisp("true");
+    }else{
+      alert("Please Select the same entry that you have edit");
+    }
   };
   // end
   const renderList = getCloneArray
@@ -93,7 +100,7 @@ const PaginationEntry = () => {
               type="button"
               className={`btn btn-secondary`}
               id={index}
-              onClick={updateEntry}
+              onClick={updateSameEntry}
               disabled={disp}
             >
               Update
